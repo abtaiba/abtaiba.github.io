@@ -66,6 +66,10 @@ a:hover {
   border: 1px solid #2c2c45;
   border-radius: 8px;
   align-self: flex-start;
+  align-items: center;
+  text-align: center;
+  display: flex; 
+  flex-direction: column;
 }
 
 .sidebar h2 {
