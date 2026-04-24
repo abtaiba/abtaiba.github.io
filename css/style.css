@@ -54,16 +54,19 @@ a:hover {
   margin: 3rem auto;
   padding: 0 1rem;
   gap: 3rem;
+  align-items: flex-start;
 }
 
 /* === Sidebar === */
 .sidebar {
+  height: auto;
   width: 260px;
   background-color: #12121e;
   padding: 1.5rem;
   border: 1px solid #2c2c45;
   border-radius: 8px;
   text-align: center;
+  align-self: flex-start;
 }
 
 .sidebar h2 {
