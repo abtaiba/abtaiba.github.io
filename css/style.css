@@ -59,7 +59,7 @@ a:hover {
 
 /* === Sidebar === */
 .sidebar {
-  height: auto;
+  height: fit-content;
   width: 260px;
   background-color: #12121e;
   padding: 1.5rem;
