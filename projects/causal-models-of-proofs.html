@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taiba Abid, PhD Student, Computer Science">
+  <title>Causal Models of Proofs // Taiba Abid</title>
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="../images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aldrich&family=Noto+Nastaliq+Urdu:wght@500;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="../css/style.css?v=proj3">
+  <script src="../js/theme.js" defer></script>
+</head>
+<body>
+  <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="ink-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"/></filter>
+    <filter id="ink-bleed"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">TA</span><span class="logo-name">Taiba Abid</span></a>
+      <nav class="nav" aria-label="Primary"><a href="../index.html"><span>00</span>Home</a><a href="../projects.html" aria-current="page"><span>01</span>Projects</a><a href="../about.html"><span>02</span>About</a><a href="../blog.html"><span>03</span>Blog</a><a href="../contact.html"><span>04</span>Contact</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="swatch" aria-hidden="true"></span><span class="tt-text">Theme</span></button>
+    </div>
+  </header>
+  <div class="status-strip" aria-hidden="true">
+    <div class="wrap"><span class="hide-sm">Michigan State University</span><span class="push">abtaiba.github.io</span></div>
+  </div>
+
+  <main id="main" class="wrap">
+    <div class="detail-crumbs"><a class="more back" href="../projects.html">Projects</a><span class="path">~/projects/causal-models-of-proofs.md</span></div>
+
+    <article class="panel detail" style="view-transition-name: prj-causal-models-of-proofs">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_03.md</span><span class="panel-meta">Active · read-only</span></div>
+      <div class="panel-body">
+        <header class="detail-head">
+          <span class="num">03</span>
+          <div><span class="label">// Project file</span><h1 class="big" style="margin-top:0.5rem">Causal Models of Proofs</h1></div>
+        </header>
+        <div class="detail-grid">
+          <div class="prose">
+          <p style="font-size:1.1rem">Using actual causality to explain verified Dafny programs: Hoare derivations become causal models, whose structural equations generate weighted explanations.</p>
+          <h2>Overview</h2>
+          <p>Based on actual causality, we designed a representation of programs that could help explain verified Dafny programs to end users. A parser breaks the program down into a causal graph, structural equations are extracted from that graph, and the equations are used to generate explanations.</p>
+          <p>Any part of a program, or the fact that the program is correct, has many possible explanations. To choose from this space of explanations we introduce a weighting mechanism; when competing explanations have the same weight, we output both.</p>
+          <h2>Actual causality in context</h2>
+          <p>The basic object is the <strong>Hoare derivation</strong>: the preconditions, postconditions, all intermediate verification conditions, and annotations. Decomposing it into a causal model lets us understand the flow of information, the logical structure of the proof, and whether projected changes to a program are feasible, without making those changes at runtime.</p>
+          <p>With this goal, we examine the definitions of actual cause, sufficient cause, strict sufficient cause and explanation, and establish what each means for the causal model obtained from a Hoare derivation.</p>
+          <h2>From Hoare triples to structural equations</h2>
+          <p>A Hoare logic judgment has the form <span class="math">{P} c {Q}</span>, where <span class="math">P</span> is the precondition, <span class="math">c</span> the command or program, and <span class="math">Q</span> the postcondition. Motivated by the definition of a Hoare triple, we translate it into the structural equation</p>
+          <p class="math-display"><span class="math">U<sub>Q</sub> := U<sub>P</sub> &and; U<sub>c</sub></span></p>
+          <p>where <span class="math">U<sub>P</sub></span> and <span class="math">U<sub>c</sub></span> may be exogenous, depending on context, and <span class="math">U<sub>Q</sub></span> is endogenous, since its value is derived from them. We decompose programs in Hoare logic following this formula, using the toy language IMP to show how each rule decomposes into a causal model.</p>
+          <h2>Causal model</h2>
+          <p>A causal model consists of a <strong>signature</strong> and a set of <strong>structural equations</strong>. The signature is the union of a set of exogenous and a set of endogenous variables. Exogenous variables take their values from outside the model and depend on no other variables; here, they are the variables that provide the initial values of the program's variables. Every variable in the program has an associated variable in the causal model.</p>
+          <h2>Actual cause</h2>
+          <p><span class="math">X&#x20D7; = x&#x20D7;</span> is an <strong>actual cause</strong> of <span class="math">&phi;</span> in the causal setting <span class="math">(M, u&#x20D7;)</span> if all three conditions hold:</p>
+          <ul class="defn"><li><strong>AC1</strong> <span class="math">(M, u&#x20D7;) &#x22A8; X&#x20D7; = x&#x20D7;</span> and <span class="math">(M, u&#x20D7;) &#x22A8; &phi;</span>: the cause and the effect both actually happen.</li><li><strong>AC2</strong> There is a set <span class="math">W&#x20D7;</span> of variables in <span class="math">&#x1D4B1;</span> and a setting <span class="math">x&#x20D7;&prime;</span> of <span class="math">X&#x20D7;</span> such that if <span class="math">(M, u&#x20D7;) &#x22A8; W&#x20D7; = w&#x20D7;*</span>, then <span class="math">(M, u&#x20D7;) &#x22A8; [X&#x20D7; &larr; x&#x20D7;&prime;, W&#x20D7; &larr; w&#x20D7;*] &not;&phi;</span>: holding <span class="math">W&#x20D7;</span> at its actual values, changing <span class="math">X&#x20D7;</span> makes <span class="math">&phi;</span> false.</li><li><strong>AC3</strong> <span class="math">X&#x20D7; = x&#x20D7;</span> is minimal.</li></ul>
+          <p>As an example, consider a Hoare derivation using the sequencing rule:</p>
+          <div class="rule"><div class="premises"><span class="math">{P<sub>1</sub>} c<sub>1</sub> {P<sub>2</sub>}</span><span class="math">{P<sub>2</sub>} c<sub>2</sub> {Q<sub>2</sub>}</span></div><div class="conclusion"><span class="math">{P<sub>1</sub>} c<sub>1</sub> ; c<sub>2</sub> {Q<sub>2</sub>}</span></div></div>
+          <h2>Causal graph</h2>
+          <p>The causal graph is built compositionally: there is a template causal graph for each rule application, and a program's Hoare derivation is decomposed using the template for each rule it applies.</p>
+          </div>
+          <aside class="detail-side">
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">meta.json</span></div>
+      <div class="panel-body">
+<dl class="readout">
+            <div><dt>ID</dt><dd>PRJ-03</dd></div>
+            <div><dt>Status</dt><dd>Active</dd></div>
+            <div><dt>Owner</dt><dd>Taiba Abid</dd></div>
+          </dl>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">tags</span></div>
+      <div class="panel-body">
+<div class="chips"><span class="tag">Causality</span><span class="tag">Formal Verification</span><span class="tag">Dafny</span></div>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">links.txt</span></div>
+      <div class="panel-body">
+<p class="todo">Paper, repo or slides links go in <code>links</code>.</p>
+      </div>
+    </section>
+          </aside>
+        </div>
+      </div>
+      <div class="panel-status"><span>● Active</span><span>PRJ-03 of 03</span><span class="push">markdown</span></div>
+    </article>
+
+    <nav class="pager" aria-label="More">
+      <a class="panel card prev" href="rocq-tactic-patterns.html"><div class="panel-body"><span class="label">← Previous</span><strong>Pattern Recognition and Tactic Classification in Rocq</strong></div></a>
+      <a class="panel card next" href="../projects.html"><div class="panel-body"><span class="label">All projects</span><strong>Back to index</strong></div></a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="wrap footer-inner">
+      <span>© 2026 Taiba Abid</span>
+      <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a>
+    </div>
+  </footer>
+</body>
+</html>

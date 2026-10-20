@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taiba Abid, PhD Student, Computer Science">
+  <title>Explainable AI with Z3 // Taiba Abid</title>
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="../images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aldrich&family=Noto+Nastaliq+Urdu:wght@500;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="../css/style.css?v=proj3">
+  <script src="../js/theme.js" defer></script>
+</head>
+<body>
+  <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="ink-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"/></filter>
+    <filter id="ink-bleed"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">TA</span><span class="logo-name">Taiba Abid</span></a>
+      <nav class="nav" aria-label="Primary"><a href="../index.html"><span>00</span>Home</a><a href="../projects.html" aria-current="page"><span>01</span>Projects</a><a href="../about.html"><span>02</span>About</a><a href="../blog.html"><span>03</span>Blog</a><a href="../contact.html"><span>04</span>Contact</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="swatch" aria-hidden="true"></span><span class="tt-text">Theme</span></button>
+    </div>
+  </header>
+  <div class="status-strip" aria-hidden="true">
+    <div class="wrap"><span class="hide-sm">Michigan State University</span><span class="push">abtaiba.github.io</span></div>
+  </div>
+
+  <main id="main" class="wrap">
+    <div class="detail-crumbs"><a class="more back" href="../projects.html">Projects</a><span class="path">~/projects/explainable-ai-z3.md</span></div>
+
+    <article class="panel detail" style="view-transition-name: prj-explainable-ai-z3">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_01.md</span><span class="panel-meta">Active · read-only</span></div>
+      <div class="panel-body">
+        <header class="detail-head">
+          <span class="num">01</span>
+          <div><span class="label">// Project file</span><h1 class="big" style="margin-top:0.5rem">Explainable AI with Z3</h1></div>
+        </header>
+        <div class="detail-grid">
+          <div class="prose">
+          <p style="font-size:1.1rem">Using the Z3 solver to compute verified stability regions around a classifier&#x27;s predictions, giving counterfactual explanations of when its output would change.</p>
+          <h2>Stability region</h2>
+          <p>We use Z3 to calculate a region of stability around the query point: if the query point were perturbed or moved to any position in this region, the classification wouldn't change.</p>
+          <p>The stability region gives us the condition under which changing the input would change the output, which is the same as a counterfactual explanation.</p>
+          <figure><img src="../images/projects/z3-stability-region.jpg" alt="Scatter plot of three classes in PCA space with a query point (yellow star) surrounded by a green cloud: the projection of the Z3-verified stability box, L-infinity delta 0.54395." loading="lazy"><figcaption>Verified stability region around the query point (green cloud), projected to two PCA dimensions.</figcaption></figure>
+          <h2>Experiments</h2>
+          <p>We ran three experiments: one with k-nearest neighbours (KNN), one with neural networks, and one with logistic regression.</p>
+          <h2>Experiment 2: neural networks</h2>
+          <p>We obtain the circuit through circuit discovery, then verify the classification model with Z3 by linearising the circuits.</p>
+          <p>We obtain the stability region and check robustness to perturbation within it: does the prediction change as we move around?</p>
+          <p>We were unable to find any actual causes, because flipping one neuron or one element of the neural network is not enough to produce a change in the final prediction.</p>
+          <figure><img src="../images/projects/z3-possible-worlds.jpg" alt="Four scatter plots of possible worlds: no ablation, and 87, 24 and 12 neurons ablated. In each, the prediction stays class 2 and Z3 confirms it." loading="lazy"><figcaption>Possible worlds: with no neurons ablated, or with 87, 24 or 12 ablated, the prediction stays at class 2 and Z3 confirms it.</figcaption></figure>
+          <h2>Result</h2>
+          <p>The final result: we can mathematically prove that a single neuron does not cause the final output given by the neural network.</p>
+          </div>
+          <aside class="detail-side">
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">meta.json</span></div>
+      <div class="panel-body">
+<dl class="readout">
+            <div><dt>ID</dt><dd>PRJ-01</dd></div>
+            <div><dt>Status</dt><dd>Active</dd></div>
+            <div><dt>Owner</dt><dd>Taiba Abid</dd></div>
+          </dl>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">tags</span></div>
+      <div class="panel-body">
+<div class="chips"><span class="tag">XAI</span><span class="tag">Z3</span><span class="tag">Neural Networks</span></div>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">links.txt</span></div>
+      <div class="panel-body">
+<p class="todo">Paper, repo or slides links go in <code>links</code>.</p>
+      </div>
+    </section>
+          </aside>
+        </div>
+      </div>
+      <div class="panel-status"><span>● Active</span><span>PRJ-01 of 03</span><span class="push">markdown</span></div>
+    </article>
+
+    <nav class="pager" aria-label="More">
+      <a class="panel card prev" href="../projects.html"><div class="panel-body"><span class="label">All projects</span><strong>Back to index</strong></div></a>
+      <a class="panel card next" href="rocq-tactic-patterns.html"><div class="panel-body"><span class="label">Next →</span><strong>Pattern Recognition and Tactic Classification in Rocq</strong></div></a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="wrap footer-inner">
+      <span>© 2026 Taiba Abid</span>
+      <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a>
+    </div>
+  </footer>
+</body>
+</html>

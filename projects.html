@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taiba Abid, PhD Student, Computer Science">
+  <title>Projects // Taiba Abid</title>
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aldrich&family=Noto+Nastaliq+Urdu:wght@500;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="css/style.css?v=proj3">
+  <script src="js/theme.js" defer></script>
+  <script src="js/projects.js" defer></script>
+</head>
+<body>
+  <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="ink-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"/></filter>
+    <filter id="ink-bleed"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">TA</span><span class="logo-name">Taiba Abid</span></a>
+      <nav class="nav" aria-label="Primary"><a href="index.html"><span>00</span>Home</a><a href="projects.html" aria-current="page"><span>01</span>Projects</a><a href="about.html"><span>02</span>About</a><a href="blog.html"><span>03</span>Blog</a><a href="contact.html"><span>04</span>Contact</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="swatch" aria-hidden="true"></span><span class="tt-text">Theme</span></button>
+    </div>
+  </header>
+  <div class="status-strip" aria-hidden="true">
+    <div class="wrap"><span class="hide-sm">Michigan State University</span><span class="push">abtaiba.github.io</span></div>
+  </div>
+
+  <main id="main" class="wrap">
+    <div class="page-hero">
+      <div>
+        <span class="label">// 01 · Research</span>
+        <h1 class="big">Projects <span class="ur" lang="ur" dir="rtl">منصوبے</span></h1>
+        <p>Recent research projects. Core interests: <span class="chips" style="display:inline-flex;vertical-align:middle"><span class="tag">Formal Verification</span><span class="tag">Type Theory</span><span class="tag">Modal Logic</span></span></p>
+      </div>
+      <span class="count" aria-label="3 projects">03</span>
+    </div>
+
+    <div class="hazard" aria-hidden="true" style="margin-bottom:1.5rem"></div>
+
+    <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">filter --tag</span><span class="panel-meta"><span data-count>3</span> shown</span></div>
+      <div class="panel-body">
+<div class="chips" data-filter role="group" aria-label="Filter projects by tag"><button class="chip chip-lg" type="button" data-tag="all" aria-pressed="true">All</button><button class="chip chip-lg" type="button" data-tag="causality" aria-pressed="false">Causality</button><button class="chip chip-lg" type="button" data-tag="dafny" aria-pressed="false">Dafny</button><button class="chip chip-lg" type="button" data-tag="formal-verification" aria-pressed="false">Formal Verification</button><button class="chip chip-lg" type="button" data-tag="machine-learning" aria-pressed="false">Machine Learning</button><button class="chip chip-lg" type="button" data-tag="neural-networks" aria-pressed="false">Neural Networks</button><button class="chip chip-lg" type="button" data-tag="proof-assistants" aria-pressed="false">Proof Assistants</button><button class="chip chip-lg" type="button" data-tag="rocq" aria-pressed="false">Rocq</button><button class="chip chip-lg" type="button" data-tag="xai" aria-pressed="false">XAI</button><button class="chip chip-lg" type="button" data-tag="z3" aria-pressed="false">Z3</button></div>
+      </div>
+    </section>
+
+    <div class="bento sec" style="margin-top:2rem" data-project-grid>
+      <a class="panel card" href="projects/explainable-ai-z3.html" data-tags="xai z3 neural-networks" style="view-transition-name: prj-explainable-ai-z3">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_01.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">01</span>
+          <h3>Explainable AI with Z3</h3><p class="excerpt">Using the Z3 solver to compute verified stability regions around a classifier&#x27;s predictions, giving counterfactual explanations of when its output would change.</p>
+          <div class="chips"><span class="tag">XAI</span><span class="tag">Z3</span><span class="tag">Neural Networks</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+      <a class="panel card" href="projects/rocq-tactic-patterns.html" data-tags="proof-assistants machine-learning rocq" style="view-transition-name: prj-rocq-tactic-patterns">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_02.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">02</span>
+          <h3>Pattern Recognition and Tactic Classification in Rocq</h3><p class="excerpt">Can we learn the structure of proofs? A new dataset of Rocq proof segments from Fiat-Crypto, labelled by tactic category, used to test twelve classifiers.</p>
+          <div class="chips"><span class="tag">Proof Assistants</span><span class="tag">Machine Learning</span><span class="tag">Rocq</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+      <a class="panel card" href="projects/causal-models-of-proofs.html" data-tags="causality formal-verification dafny" style="view-transition-name: prj-causal-models-of-proofs">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_03.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">03</span>
+          <h3>Causal Models of Proofs</h3><p class="excerpt">Using actual causality to explain verified Dafny programs: Hoare derivations become causal models, whose structural equations generate weighted explanations.</p>
+          <div class="chips"><span class="tag">Causality</span><span class="tag">Formal Verification</span><span class="tag">Dafny</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="wrap footer-inner">
+      <span>© 2026 Taiba Abid</span>
+      <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a>
+    </div>
+  </footer>
+</body>
+</html>

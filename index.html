@@ -1,70 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Taiba Abid</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taiba Abid, PhD Student, Computer Science">
+  <title>Home // Taiba Abid</title>
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aldrich&family=Noto+Nastaliq+Urdu:wght@500;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="css/style.css?v=proj3">
+  <script src="js/theme.js" defer></script>
 </head>
 <body>
-  <header class="banner">
-    <h1>Taiba Abid</h1>
-    <p>  </p>
+  <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="ink-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"/></filter>
+    <filter id="ink-bleed"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">TA</span><span class="logo-name">Taiba Abid</span></a>
+      <nav class="nav" aria-label="Primary"><a href="index.html" aria-current="page"><span>00</span>Home</a><a href="projects.html"><span>01</span>Projects</a><a href="about.html"><span>02</span>About</a><a href="blog.html"><span>03</span>Blog</a><a href="contact.html"><span>04</span>Contact</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="swatch" aria-hidden="true"></span><span class="tt-text">Theme</span></button>
+    </div>
   </header>
+  <div class="status-strip" aria-hidden="true">
+    <div class="wrap"><span class="hide-sm">Michigan State University</span><span class="push">abtaiba.github.io</span></div>
+  </div>
 
-  <nav class="navbar">
-    <a href="index.html">Home</a>
+  <main id="main" class="wrap">
+    <div class="home-hero">
+    <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">~/boot.zsh</span><span class="panel-meta">zsh</span></div>
+      <div class="panel-body">
+        <div class="term">
+          <p class="cmd">whoami</p>
+          <h1 class="mega">Taiba<br><span class="accent">Abid</span></h1>
+          <p class="cmd">cat role.txt</p>
+          <p class="out arrow">PhD Student, Computer Science · Michigan State University</p>
+          <p class="cmd">cat focus.txt</p>
+          <p class="out arrow">Explainable Formal Methods<span class="cursor" aria-hidden="true"></span></p>
+        </div>
+        <div class="chips">
+          <a class="btn" href="about.html">More about me →</a>
+          <a class="btn alt" href="projects.html">See projects →</a>
+        </div>
+      </div>
+      <div class="panel-status"><span>● Ready</span><span>Ln 6, Col 1</span><span class="push">UTF-8</span></div>
+    </section>
+    <section class="panel">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">about.jpg</span></div>
+      <div class="id-photo"><img src="images/avatar.jpg" alt="Portrait of Taiba Abid"></div>
+      <div class="panel-body">
+        <dl class="readout">
+          <div><dt>Status</dt><dd>PhD Student</dd></div>
+          <div><dt>Dept</dt><dd>Computer Science</dd></div>
+          <div><dt>Inst</dt><dd>Michigan State University</dd></div>
+          <div><dt>Contact</dt><dd><a href="mailto:specbtaiba@gmail.com">specbtaiba@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </section>
+    </div>
 
-    <a href="about.html">About</a>
-
-    <a href="research.html">Research</a>
-
-    <a href="activities.html">Activities</a>
-
-    <a href="resume.html">CV</a>
-    
-  </nav>
-
-
-  <div class="wrapper">
-    <!-- Left: Profile -->
-    <aside class="sidebar">
-      <img src="assets/quincy1 copy.jpg" alt=" " class="avatar">
-      <h2>Taiba Abid</h2>
-      <p class="role">PhD Student<br>Computer Science</p>
-      <p>Email: <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a></p>
-      <ul class="profile-links">
-        <!-- <li><a href="#">CV (PDF)</a></li> --> 
-        <li><a>CMU: MS in Logic, Computation, and Methodology</a></li>
-        <li><a>Pondicherry University: BSc Mathematics</a></li>
-      </ul>
-    </aside>
-
-  <main class="content">
-    <section>
-      <h2>Hello!</h2>
-      <p> </p>
+    <section class="sec">
+      <div class="sec-head"><span class="idx">// 01</span><h2>Hello <span class="ur" lang="ur" dir="rtl">سلام</span></h2></div>
+      <div class="mission">
+      <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">~/README.md</span><span class="panel-meta">markdown</span></div>
+      <div class="panel-body">
+          <p>I&#x27;m a PhD student in Computer Science at Michigan State University where I study Explainable Formal Methods.</p>
+          <p>I work on Automated Reasoning and Machine Learning using the tools of Formal Logic, Modal Logic, Model Checking, and Formal Verification.</p>
+          <p>I am interested in XAI and Interpretability as well as AI Safety and Alignment.</p>
+      </div>
+    </section>
+        <div class="goal">
+          <span class="label">// Prime directive</span>
+          <blockquote>My goal is to understand <em>cognition</em>, <em>intelligence</em>, and <em>reasoning</em>.</blockquote>
+          <a class="btn" href="about.html" style="align-self:flex-start">Full bio →</a>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <p>I'm a PhD student in Computer Science at Michigan State University where I study Explainable Formal Methods.</p>
-      <p>I work on Automated Reasoning and Machine Learning using the tools of Formal Logic, Modal Logic, Model Checking, and Formal Verification.</p> 
-      <p>I am interested in XAI and Interpretability as well as AI Safety and Alignment.</p>
-
-      <p>My goal is to understand cognition, intelligence, and reasoning.</p>
-      
-      <p> </p>
-
-      
+    <section class="sec">
+      <div class="sec-head"><span class="idx">// 02</span><h2>Selected projects <span class="ur" lang="ur" dir="rtl">منصوبے</span></h2><a class="more" href="projects.html">All 3 projects</a></div>
+      <div class="grid-3">
+      <a class="panel card" href="projects/explainable-ai-z3.html" data-tags="xai z3 neural-networks" style="view-transition-name: prj-explainable-ai-z3">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_01.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">01</span>
+          <h3>Explainable AI with Z3</h3><p class="excerpt">Using the Z3 solver to compute verified stability regions around a classifier&#x27;s predictions, giving counterfactual explanations of when its output would change.</p>
+          <div class="chips"><span class="tag">XAI</span><span class="tag">Z3</span><span class="tag">Neural Networks</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+      <a class="panel card" href="projects/rocq-tactic-patterns.html" data-tags="proof-assistants machine-learning rocq" style="view-transition-name: prj-rocq-tactic-patterns">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_02.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">02</span>
+          <h3>Pattern Recognition and Tactic Classification in Rocq</h3><p class="excerpt">Can we learn the structure of proofs? A new dataset of Rocq proof segments from Fiat-Crypto, labelled by tactic category, used to test twelve classifiers.</p>
+          <div class="chips"><span class="tag">Proof Assistants</span><span class="tag">Machine Learning</span><span class="tag">Rocq</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+      <a class="panel card" href="projects/causal-models-of-proofs.html" data-tags="causality formal-verification dafny" style="view-transition-name: prj-causal-models-of-proofs">
+        <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_03.md</span><span class="panel-meta">Active</span></div>
+        <div class="panel-body">
+          <span class="num">03</span>
+          <h3>Causal Models of Proofs</h3><p class="excerpt">Using actual causality to explain verified Dafny programs: Hoare derivations become causal models, whose structural equations generate weighted explanations.</p>
+          <div class="chips"><span class="tag">Causality</span><span class="tag">Formal Verification</span><span class="tag">Dafny</span></div>
+          <span class="open">Open file →</span>
+        </div>
+      </a>
+      </div>
     </section>
-    
-    <section>
-      <p> Website under construction!</p>
+
+    <section class="sec">
+      <div class="hazard-label"><span>More about me</span><a class="btn" href="about.html">About →</a><span>More projects</span><a class="btn" href="projects.html">Projects →</a></div>
     </section>
   </main>
 
-  <!-- footer -->
-    <!-- <p>2026</p> --> 
-  <!-- </footer> --> 
+  <footer class="site-footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="wrap footer-inner">
+      <span>© 2026 Taiba Abid</span>
+      <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a>
+    </div>
+  </footer>
 </body>
-</html> 
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Taiba Abid, PhD Student, Computer Science">
+  <title>Pattern Recognition and Tactic Classification in Rocq // Taiba Abid</title>
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="../images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aldrich&family=Noto+Nastaliq+Urdu:wght@500;700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="../css/style.css?v=proj3">
+  <script src="../js/theme.js" defer></script>
+</head>
+<body>
+  <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="ink-rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5"/></filter>
+    <filter id="ink-bleed"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4"/></filter>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark">TA</span><span class="logo-name">Taiba Abid</span></a>
+      <nav class="nav" aria-label="Primary"><a href="../index.html"><span>00</span>Home</a><a href="../projects.html" aria-current="page"><span>01</span>Projects</a><a href="../about.html"><span>02</span>About</a><a href="../blog.html"><span>03</span>Blog</a><a href="../contact.html"><span>04</span>Contact</a></nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="swatch" aria-hidden="true"></span><span class="tt-text">Theme</span></button>
+    </div>
+  </header>
+  <div class="status-strip" aria-hidden="true">
+    <div class="wrap"><span class="hide-sm">Michigan State University</span><span class="push">abtaiba.github.io</span></div>
+  </div>
+
+  <main id="main" class="wrap">
+    <div class="detail-crumbs"><a class="more back" href="../projects.html">Projects</a><span class="path">~/projects/rocq-tactic-patterns.md</span></div>
+
+    <article class="panel detail" style="view-transition-name: prj-rocq-tactic-patterns">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">prj_02.md</span><span class="panel-meta">Active · read-only</span></div>
+      <div class="panel-body">
+        <header class="detail-head">
+          <span class="num">02</span>
+          <div><span class="label">// Project file</span><h1 class="big" style="margin-top:0.5rem">Pattern Recognition and Tactic Classification in Rocq</h1></div>
+        </header>
+        <div class="detail-grid">
+          <div class="prose">
+          <p style="font-size:1.1rem">Can we learn the structure of proofs? A new dataset of Rocq proof segments from Fiat-Crypto, labelled by tactic category, used to test twelve classifiers.</p>
+          <h2>The question</h2>
+          <p>In Rocq (formerly Coq), a proof is a script of <strong>tactics</strong>: commands such as <code>intros</code>, <code>simpl</code> or <code>apply</code> that transform the goal step by step until it is proved. Rocq labels code as theorems and lemmas, but those labels say nothing about how a proof actually works.</p>
+          <p>Can a classifier learn how proofs are structured? This project builds a dataset that labels pieces of proofs by the kind of tactics they use, then tests whether classifiers can learn those labels. The longer-term aim is to look at an incomplete proof and predict which kind of tactic belongs in the gap.</p>
+          <h2>Data</h2>
+          <p>The dataset comes from <a href="https://github.com/mit-plv/fiat-crypto">Fiat-Crypto</a>, MIT CSAIL's Coq formalisation of cryptographic primitives, with nearly 8,000 commits. I parsed every proof into <strong>segments</strong>: contiguous blocks of tactics working on a single subgoal, split at bullets, braces and indentation. Each segment records its tactics, nesting depth, position in the proof and parent theorem.</p>
+          <p>That gives 4,328 segments from 263 files and 1,582 theorems. Each tactic is mapped to one of seven groups (below), and a segment is labelled with its most frequent group. Segments that only use Fiat-Crypto's own custom tactics can't be mapped, so they are dropped as unknown, leaving 3,907 labelled segments.</p>
+          <h2>Tactic groups</h2>
+          <ul><li><strong>rewrite-reduce</strong>: simplifies terms without closing goals (<code>simpl</code>, <code>cbn</code>, <code>unfold</code>, <code>subst</code>, <code>autorewrite</code>). The largest group, because Fiat-Crypto does heavy symbolic field arithmetic.</li><li><strong>hypothesis-management</strong>: organises the available hypotheses without changing the goal (<code>intros</code>, <code>clear</code>, <code>revert</code>, <code>set</code>, <code>assert</code>).</li><li><strong>application</strong>: closes goals by matching a hypothesis, lemma or constructor (<code>apply</code>, <code>exact</code>, <code>auto</code>, <code>split</code>, <code>constructor</code>).</li><li><strong>case-induction</strong>: splits goals into subgoals and gives proofs their tree shape (<code>induction</code>, <code>destruct</code>, <code>inversion</code>).</li><li><strong>contradiction</strong>: closes goals with inconsistent hypotheses or a false goal (<code>contradiction</code>, <code>exfalso</code>, <code>congruence</code>).</li><li><strong>arithmetic-algebra</strong>: automated arithmetic and algebra solvers, used only in specific situations (<code>ring</code>, <code>field</code>, <code>lia</code>, <code>nra</code>).</li><li><strong>meta-tactical</strong>: combinators that add control flow around other tactics (<code>try</code>, <code>repeat</code>, <code>solve</code>, <code>now</code>).</li></ul>
+          <p>Nearly every declaration uses most groups somewhere, but within a single segment one group usually dominates, and that is what the labels capture. The labels are heavily imbalanced:</p>
+          <div class="table-wrap"><table><thead><tr><th>Tactic group</th><th>Declarations using it anywhere</th><th>Segments labelled with it</th></tr></thead><tbody><tr><td>rewrite-reduce</td><td>765 (97.0%)</td><td>1,703 (39.3%)</td></tr><tr><td>hypothesis-management</td><td>754 (95.6%)</td><td>853 (19.7%)</td></tr><tr><td>application</td><td>753 (95.4%)</td><td>705 (16.3%)</td></tr><tr><td>meta-tactical</td><td>746 (94.6%)</td><td>317 (7.3%)</td></tr><tr><td>case-induction</td><td>743 (94.2%)</td><td>306 (7.1%)</td></tr><tr><td>contradiction</td><td>700 (88.7%)</td><td>5 (0.1%)</td></tr><tr><td>arithmetic-algebra</td><td>351 (44.5%)</td><td>18 (0.4%)</td></tr><tr><td>unknown</td><td>n/a</td><td>421 (9.7%)</td></tr></tbody></table></div>
+          <h2>Features</h2>
+          <p>Each segment has over 70 features in five groups:</p>
+          <ul><li><strong>Structure</strong>: segment length, proof length, and how far through the proof the segment sits.</li><li><strong>Composition</strong>: the share of the segment's tactics in each of the seven groups.</li><li><strong>Derived</strong>: entropy of that mix, number of branches, tactic diversity, and the share of recognised tactics.</li><li><strong>Proof context</strong>: the same mix and entropy across the whole proof, plus its number of segments.</li><li><strong>Tactic flags</strong>: one yes/no flag for each of the 50 most common tactics.</li></ul>
+          <h2>Experiments and results</h2>
+          <p>Twelve classifiers are compared: decision tree, random forest, bagging, logistic regression, linear perceptron, KNN, Parzen window, naive Bayes, Gaussian MLE, Bayesian estimation, Bayes minimum risk, and a voting ensemble. The data is split 70/15/15 into training, validation and test sets, and predictions are scored against the segment labels described above.</p>
+          <p>Three runs, reported as test accuracy:</p>
+          <ul><li><strong>All 70+ features:</strong> tree-based and linear models do very well (bagging 99.5%, decision tree 99.0%, logistic regression 98.5%), but the probabilistic classifiers collapse (naive Bayes 26.5%, Bayes minimum risk 26.3%, Bayesian estimation 51.7%).</li><li><strong>Reduced with PCA</strong> (principal component analysis): the three probabilistic classifiers recover to 67&ndash;72%, while most of the strong ones drop. Logistic regression stays best at 96.4%.</li><li><strong>Reduced with MDA</strong> (multiple discriminant analysis, down to just 6 features): every classifier lands between 91% and 96%, with random forest highest at 96.4%.</li></ul>
+          <p>Some classifiers were also given class-weighted versions to account for the imbalanced labels.</p>
+          <h2>Limitations</h2>
+          <p>Fiat-Crypto is small for this: about 1,500 theorems give about 4,000 segments, with a lot of duplication. The high scores could come from the feature engineering, or from the task being too easy, and features that work for Fiat-Crypto may not suit other Rocq projects. The natural next step is to run the same pipeline on other repositories. More proof-aware feature selection would need manual labelling and metaprogramming, which is out of scope for now.</p>
+          </div>
+          <aside class="detail-side">
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">meta.json</span></div>
+      <div class="panel-body">
+<dl class="readout">
+            <div><dt>ID</dt><dd>PRJ-02</dd></div>
+            <div><dt>Status</dt><dd>Active</dd></div>
+            <div><dt>Owner</dt><dd>Taiba Abid</dd></div>
+          </dl>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">tags</span></div>
+      <div class="panel-body">
+<div class="chips"><span class="tag">Proof Assistants</span><span class="tag">Machine Learning</span><span class="tag">Rocq</span></div>
+      </div>
+    </section>
+          <section class="panel ">
+      <div class="panel-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="panel-file">links.txt</span></div>
+      <div class="panel-body">
+<p class="todo">Paper, repo or slides links go in <code>links</code>.</p>
+      </div>
+    </section>
+          </aside>
+        </div>
+      </div>
+      <div class="panel-status"><span>● Active</span><span>PRJ-02 of 03</span><span class="push">markdown</span></div>
+    </article>
+
+    <nav class="pager" aria-label="More">
+      <a class="panel card prev" href="explainable-ai-z3.html"><div class="panel-body"><span class="label">← Previous</span><strong>Explainable AI with Z3</strong></div></a>
+      <a class="panel card next" href="causal-models-of-proofs.html"><div class="panel-body"><span class="label">Next →</span><strong>Causal Models of Proofs</strong></div></a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="wrap footer-inner">
+      <span>© 2026 Taiba Abid</span>
+      <a href="mailto:abidtaib@msu.edu">abidtaib@msu.edu</a>
+    </div>
+  </footer>
+</body>
+</html>
