@@ -26,6 +26,9 @@
   --lime: #b8f400;
   --orange: #e5501a;
   --on-accent: #111;
+  /* Banners + the hero name: dark purple on light paper, orange in dark mode */
+  --banner: #3d1a63;
+  --on-banner: #fff;
 
   /* Type */
   /* Previous pair: "Space Grotesk" + "JetBrains Mono" */
@@ -63,6 +66,8 @@
     --blue: #5b82ff;
     --lime: #c6ff3d;
     --orange: #ff7a3d;
+    --banner: var(--orange);
+    --on-banner: #111;
     --shadow-color: var(--orange);
     --ghost-b: color-mix(in srgb, var(--lime) 85%, transparent);
     --grain-opacity: 0.22;
@@ -84,6 +89,8 @@
   --blue: #5b82ff;
   --lime: #c6ff3d;
   --orange: #ff7a3d;
+  --banner: var(--orange);
+  --on-banner: #111;
   --shadow-color: var(--orange);
   --ghost-b: color-mix(in srgb, var(--lime) 85%, transparent);
   --grain-opacity: 0.22;
@@ -283,7 +290,7 @@ h3    { font-size: 1.35rem; line-height: 1.05; }
 .hazard {
   height: 14px;
   border-block: var(--bw) solid var(--line);
-  background: var(--orange);
+  background: var(--banner);
 }
 
 .hazard-label {
@@ -293,13 +300,13 @@ h3    { font-size: 1.35rem; line-height: 1.05; }
   gap: 1rem;
   padding: 0.35rem 1rem;
   border: var(--bw) solid var(--line);
-  background: var(--orange);
+  background: var(--banner);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-.hazard-label span { padding: 0.1rem 0.6rem; background: var(--orange); color: #111; border: var(--bw) solid #111; }
+.hazard-label span { padding: 0.1rem 0.6rem; background: var(--banner); color: var(--on-banner); border: var(--bw) solid var(--on-banner); }
 
 /* ---------- Panels (editor / terminal windows) ---------- */
 
@@ -339,6 +346,42 @@ h3    { font-size: 1.35rem; line-height: 1.05; }
 .lights i:nth-child(1) { background: var(--orange); }
 .lights i:nth-child(2) { background: var(--lime); }
 .lights i:nth-child(3) { background: var(--blue); }
+
+/* Window controls: close, minimise, maximise (wired up in js/windows.js) */
+.lights i { position: relative; cursor: pointer; }
+.lights i::after {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--font-body); font-size: 0.6rem; font-style: normal; font-weight: 700; line-height: 1;
+  color: #111; text-shadow: none;
+  opacity: 0;
+}
+.lights i:nth-child(1)::after { content: "×"; }
+.lights i:nth-child(2)::after { content: "–"; }
+.lights i:nth-child(3)::after { content: "+"; color: #fff; }
+.lights:hover i::after { opacity: 1; }
+.lights i:hover { filter: brightness(1.15); }
+
+.panel.is-closing { animation: win-close 0.18s var(--ease) forwards; }
+@keyframes win-close { to { opacity: 0; transform: scale(0.94); } }
+.panel.is-closed { display: none; }
+
+.panel.is-min > :not(.panel-bar) { display: none; }
+.panel.is-min > .panel-bar { border-bottom: 0; }
+
+.panel.is-max {
+  position: fixed;
+  inset: 4.5rem 1rem 1rem;
+  z-index: 150;
+  overflow: auto;
+  transform: none !important;
+  view-transition-name: none !important;
+}
+.panel.is-max > .panel-bar { position: sticky; top: 0; z-index: 1; }
+.panel.is-max .id-photo img { max-height: 70vh; aspect-ratio: auto; object-fit: contain; }
+html.has-max { overflow: hidden; }
+.win-backdrop { position: fixed; inset: 0; z-index: 149; background: color-mix(in srgb, var(--paper) 75%, transparent); }
+.win-backdrop[hidden] { display: none; }
 
 .panel-file { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .panel-meta { margin-left: auto; color: var(--muted); white-space: nowrap; }
@@ -501,7 +544,7 @@ h3    { font-size: 1.35rem; line-height: 1.05; }
 }
 
 .home-hero .mega { margin: 0.25rem 0 1.25rem; }
-.home-hero .mega .accent { -webkit-text-stroke: 0; }
+.home-hero .mega .accent { color: var(--banner); -webkit-text-stroke: 0; }
 
 .id-photo {
   position: relative;
