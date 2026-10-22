@@ -349,6 +349,9 @@ h3    { font-size: 1.35rem; line-height: 1.05; }
 
 /* Window controls: close, minimise, maximise (wired up in js/windows.js) */
 .lights i { position: relative; cursor: pointer; }
+/* Bigger hit area than the dot itself, so near-misses (and taps) still count */
+.lights i::before { content: ""; position: absolute; inset: -0.3rem -0.15rem; }
+.lights { cursor: default; }
 .lights i::after {
   position: absolute; inset: 0;
   display: grid; place-items: center;

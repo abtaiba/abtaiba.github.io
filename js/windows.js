@@ -100,15 +100,18 @@
 
   document.querySelectorAll('.panel .lights').forEach((lights) => {
     const panel = lights.closest('.panel');
-    lights.querySelectorAll('i').forEach((light, n) => {
-      if (!actions[n]) return;
-      light.title = titles[n];
-      // Cards are links: a click on a control must not open the card
-      light.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        actions[n](panel);
-      });
+    const lightEls = [...lights.querySelectorAll('i')];
+    lightEls.forEach((light, n) => { if (titles[n]) light.title = titles[n]; });
+    // Cards are links: a click anywhere on the controls (gaps included) must not open the card
+    lights.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const action = actions[lightEls.indexOf(event.target.closest('i'))];
+      if (action) action(panel);
+    });
+    // ...nor a stray click on a card while it is closing
+    panel.addEventListener('click', (event) => {
+      if (panel.classList.contains('is-closing')) event.preventDefault();
     });
   });
 
