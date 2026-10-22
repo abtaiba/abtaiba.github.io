@@ -1,6 +1,8 @@
 // Window controls on every panel, like a desktop:
 // orange closes the panel, lime minimises it to its title bar, blue maximises it.
-// Closed panels come back on the next page load (everything is reachable from the nav).
+// On the home, about and contact pages closed panels go to a dock on the left;
+// closing a project or blog post goes back to its index; other closed panels
+// come back on the next page load (everything is reachable from the nav).
 // Esc or a click outside a maximised panel restores it.
 
 (() => {
@@ -33,11 +35,59 @@
     maxed = panel;
   }
 
+  // On pages marked data-dock, a closed panel leaves a tab in a dock on the left;
+  // clicking the tab brings the panel back.
+  const dockable = !!document.querySelector('[data-dock]');
+  let dock = null;
+
+  function reopen(panel, tab) {
+    tab.remove();
+    if (!dock.children.length) dock.hidden = true;
+    panel.classList.remove('is-closed');
+    if (reduceMotion) return;
+    panel.classList.add('is-opening');
+    panel.addEventListener('animationend', () => panel.classList.remove('is-opening'), { once: true });
+  }
+
+  function addToDock(panel) {
+    if (!dock) {
+      dock = document.createElement('nav');
+      dock.className = 'win-dock';
+      dock.setAttribute('aria-label', 'Closed windows');
+      document.body.append(dock);
+    }
+    const name = panel.querySelector('.panel-file')?.textContent.trim() || 'window';
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'win-dock-tab';
+    tab.title = `Reopen ${name}`;
+    tab.innerHTML = '<span class="win-dock-icon" aria-hidden="true"></span><span class="win-dock-name"></span>';
+    tab.lastChild.textContent = name;
+    tab.addEventListener('click', () => reopen(panel, tab));
+    dock.append(tab);
+    dock.hidden = false;
+  }
+
   function close(panel) {
+    if (panel.classList.contains('is-closing')) return;
     if (maxed === panel) restore();
-    if (reduceMotion) return panel.classList.add('is-closed');
+    // Closing a project or post goes back to its index (the breadcrumb link)
+    const back = panel.matches('.detail') && document.querySelector('.detail-crumbs .back');
+    const done = () => {
+      if (back) return location.assign(back.href);
+      panel.classList.remove('is-closing');
+      panel.classList.add('is-closed');
+      if (dockable) addToDock(panel);
+    };
+    if (reduceMotion) return done();
+    panel.classList.remove('is-opening');
     panel.classList.add('is-closing');
-    panel.addEventListener('animationend', () => panel.classList.add('is-closed'), { once: true });
+    const onEnd = (event) => {
+      if (event.target !== panel) return;
+      panel.removeEventListener('animationend', onEnd);
+      done();
+    };
+    panel.addEventListener('animationend', onEnd);
   }
 
   function minimise(panel) {
