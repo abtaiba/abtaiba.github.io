@@ -483,18 +483,16 @@ html.has-max { overflow: hidden; }
 .readout dt { color: var(--muted); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 0.15em; }
 .readout dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
 .readout a { color: var(--blue); }
-.ink-link { display: inline-flex; align-items: center; gap: 0.4em; }
-.ink-icon {
-  width: 1.25em;
-  height: 1.25em;
-  flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: url(#ink-bleed);
+/* LinkedIn's brand blue, so the handle reads as LinkedIn at a glance */
+.readout a.linkedin-badge {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 3px;
+  background: #0a66c2;
+  color: #fff;
+  text-decoration: none;
 }
+.readout a.linkedin-badge:hover { background: #004182; }
 
 /* ---------- Chips & tags ---------- */
 
